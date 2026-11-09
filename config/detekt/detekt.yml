@@ -1,0 +1,52 @@
+config:
+  validation: true
+  warningsAsErrors: true
+
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+
+processors:
+  active: true
+
+console-reports:
+  active: true
+
+comments:
+  active: true
+
+complexity:
+  LongMethod:
+    active: true
+    threshold: 60
+
+  LongParameterList:
+    active: true
+    functionThreshold: 8
+    constructorThreshold: 10
+
+  TooManyFunctions:
+    active: true
+    thresholdInFiles: 20
+
+style:
+  MagicNumber:
+    active: true
+    ignoreNumbers:
+      - "-1"
+      - "0"
+      - "1"
+      - "2"
+    ignoreHashCodeFunction: true
+    ignorePropertyDeclaration: true
+
+  ReturnCount:
+    active: true
+    max: 3
+
+potential-bugs:
+  UnsafeCallOnNullableType:
+    active: true
+
+  UnsafeCast:
+    active: true
