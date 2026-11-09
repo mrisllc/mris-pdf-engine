@@ -4,17 +4,24 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 
 class MrisPublishingPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            pluginManager.apply("maven-publish")
-            extensions.configure<PublishingExtension> {
-                publications {
-                    create<MavenPublication>("release") {
-                        from(components["java"])
-                        groupId = "com.mris.pdf"
-                        artifactId = project.name
-                        version = "1.0.0"
-                    }
+
+    override fun apply(target: Project) = with(target) {
+
+        pluginManager.apply("maven-publish")
+
+        extensions.configure(
+            PublishingExtension::class.java
+        ) {
+            publications {
+                register(
+                    "maven",
+                    MavenPublication::class.java
+                ) {
+                    from(components.getByName("java"))
+
+                    groupId = "com.mris.pdf"
+                    artifactId = project.name
+                    version = project.version.toString()
                 }
             }
         }
