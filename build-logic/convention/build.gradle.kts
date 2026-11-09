@@ -1,32 +1,43 @@
 plugins {
     `kotlin-dsl`
+    `java-gradle-plugin`
 }
 
-group = "com.mris.pdf.buildlogic"
+repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
 
 dependencies {
-    implementation("com.android.application:com.android.application.gradle.plugin:8.5.2")
-    implementation("com.android.library:com.android.library.gradle.plugin:8.5.2")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24")
+    implementation(
+        "org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.21"
+    )
 }
 
 gradlePlugin {
     plugins {
         register("mrisKotlinLibrary") {
-            id = "mris.kotlin.library"
-            implementationClass = "MrisKotlinLibraryPlugin"
+            id = "com.mris.kotlin-library"
+            implementationClass =
+                "MrisKotlinLibraryPlugin"
         }
+
         register("mrisKotlinTest") {
-            id = "mris.kotlin.test"
-            implementationClass = "MrisKotlinTestPlugin"
+            id = "com.mris.kotlin-test"
+            implementationClass =
+                "MrisKotlinTestPlugin"
         }
+
         register("mrisEngineModule") {
-            id = "mris.engine.module"
-            implementationClass = "MrisEngineModulePlugin"
+            id = "com.mris.engine-module"
+            implementationClass =
+                "MrisEngineModulePlugin"
         }
+
         register("mrisPublishing") {
-            id = "mris.publishing"
-            implementationClass = "MrisPublishingPlugin"
+            id = "com.mris.publishing"
+            implementationClass =
+                "MrisPublishingPlugin"
         }
     }
 }
