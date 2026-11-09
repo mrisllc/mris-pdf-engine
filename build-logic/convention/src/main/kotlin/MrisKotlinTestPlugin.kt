@@ -10,7 +10,8 @@ class MrisKotlinTestPlugin : Plugin<Project> {
 
         tasks.withType(Test::class.java).configureEach {
             useJUnitPlatform()
-            failOnNoDiscoveredTests = false
+
+            failOnNoDiscoveredTests = true
         }
     }
 }
