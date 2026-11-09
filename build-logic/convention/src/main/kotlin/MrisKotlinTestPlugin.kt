@@ -1,3 +1,4 @@
+
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
@@ -10,8 +11,6 @@ class MrisKotlinTestPlugin : Plugin<Project> {
 
         tasks.withType(Test::class.java).configureEach {
             useJUnitPlatform()
-
-            failOnNoDiscoveredTests = true
         }
     }
 }
