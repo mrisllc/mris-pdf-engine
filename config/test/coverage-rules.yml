@@ -1,0 +1,41 @@
+schemaVersion: 1
+
+coverage:
+
+  global:
+    lineCoverage: 0.85
+    branchCoverage: 0.80
+
+  criticalModules:
+
+    - module: syntax
+      lineCoverage: 0.95
+      branchCoverage: 0.90
+
+    - module: document-core
+      lineCoverage: 0.95
+      branchCoverage: 0.90
+
+    - module: content
+      lineCoverage: 0.90
+      branchCoverage: 0.85
+
+    - module: graphics
+      lineCoverage: 0.90
+      branchCoverage: 0.85
+
+    - module: transformation
+      lineCoverage: 0.95
+      branchCoverage: 0.90
+
+    - module: runtime
+      lineCoverage: 0.90
+      branchCoverage: 0.85
+
+  exclusions:
+    - generated
+    - build
+    - testFixtures
+
+  enforcement:
+    failOnViolation: true
