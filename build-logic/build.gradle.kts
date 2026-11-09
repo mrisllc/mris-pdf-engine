@@ -1,1 +1,8 @@
-// Root - কিছু করার দরকার নাই
+plugins {
+    `kotlin-dsl`
+}
+
+repositories {
+    gradlePluginPortal()
+    mavenCentral()
+}
