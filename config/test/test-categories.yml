@@ -1,0 +1,35 @@
+schemaVersion: 1
+
+categories:
+
+  - id: unit
+    description: Individual class and function tests
+    required: true
+
+  - id: integration
+    description: Tests across interacting engine modules
+    required: true
+
+  - id: property
+    description: Property-based and invariant tests
+    required: true
+
+  - id: fuzz
+    description: Malformed and adversarial PDF input tests
+    required: true
+
+  - id: conformance
+    description: ISO PDF specification conformance tests
+    required: true
+
+  - id: regression
+    description: Previously fixed defect verification
+    required: true
+
+  - id: performance
+    description: Parsing, rendering and processing benchmarks
+    required: true
+
+  - id: security
+    description: Parser and document security tests
+    required: true
