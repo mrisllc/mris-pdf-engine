@@ -1,0 +1,88 @@
+name: Generate Gradle Wrapper
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-wrapper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Setup Gradle 9.7.0
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: "9.7.0"
+
+      - name: Generate Gradle Wrapper
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BOOTSTRAP="$RUNNER_TEMP/mris-wrapper-bootstrap"
+
+          mkdir -p "$BOOTSTRAP"
+
+          cd "$BOOTSTRAP"
+
+          printf 'rootProject.name = "wrapper-bootstrap"\n' \
+            > settings.gradle.kts
+
+          printf 'plugins { base }\n' \
+            > build.gradle.kts
+
+          gradle wrapper \
+            --gradle-version 9.7.0 \
+            --distribution-type bin
+
+          cd "$GITHUB_WORKSPACE"
+
+          mkdir -p gradle/wrapper
+
+          cp "$BOOTSTRAP/gradlew" .
+          cp "$BOOTSTRAP/gradlew.bat" .
+
+          cp "$BOOTSTRAP/gradle/wrapper/gradle-wrapper.jar" \
+            gradle/wrapper/
+
+          cp "$BOOTSTRAP/gradle/wrapper/gradle-wrapper.properties" \
+            gradle/wrapper/
+
+          printf '\ndistributionSha256Sum=84fbba45c7f4c64abc77460e1c00f541e9f960e3c7ed2538f1ede19eacd873ae\n' \
+            >> gradle/wrapper/gradle-wrapper.properties
+
+          chmod +x gradlew
+
+      - name: Commit Wrapper files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add gradlew gradlew.bat gradle/wrapper
+
+          if git diff --cached --quiet; then
+            echo "No wrapper changes detected."
+          else
+            git commit -m "build: add Gradle 9.7.0 wrapper"
+            git push
+          fi
+
+      - name: Verify Gradle Wrapper
+        run: ./gradlew --version
+
+      - name: Validate root build
+        run: ./gradlew help --configuration-cache
+
+      - name: Compile convention plugins
+        run: ./gradlew -p build-logic :convention:build
