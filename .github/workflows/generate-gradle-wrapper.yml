@@ -106,9 +106,9 @@ jobs:
       # ----------------------------------------
       # 07. Validate Root Build
       # ----------------------------------------
-      - name: Validate root build
+            - name: Validate root build
         run: |
-          ./gradlew help --configuration-cache
+          ./gradlew help --configuration-cache --stacktrace
 
       # ----------------------------------------
       # 08. Compile Convention Plugins
