@@ -1,3 +1,4 @@
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -17,29 +18,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "MRIS-Independent-PDF-Engine"
 
-includeBuild("build-logic")
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-    }
-}
-
-dependencyResolutionManagement {
-    repositoriesMode.set(
-        RepositoriesMode.FAIL_ON_PROJECT_REPOS
-    )
-
-    repositories {
-        mavenCentral()
-    }
-}
-
-rootProject.name = "MRIS-Independent-PDF-Engine"
-
+// Build Logic
 includeBuild("build-logic")
 
-// Foundation modules
+// Foundation Modules
 include(
     ":foundation:foundation-common",
     ":foundation:foundation-errors",
