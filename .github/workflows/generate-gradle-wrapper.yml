@@ -85,4 +85,17 @@ jobs:
         run: ./gradlew help --configuration-cache
 
       - name: Compile convention plugins
+      
+            - name: Validate Foundation Modules
+        run: |
+          ./gradlew projects
+
+          ./gradlew \
+            :foundation:foundation-common:build \
+            :foundation:foundation-errors:build \
+            :foundation:foundation-collections:build \
+            :foundation:foundation-io:build \
+            :foundation:foundation-memory:build \
+            :foundation:foundation-concurrency:build \
+            :foundation:foundation-testing:build
         run: ./gradlew -p build-logic :convention:build
