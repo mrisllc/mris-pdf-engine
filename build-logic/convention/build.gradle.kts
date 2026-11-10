@@ -1,3 +1,4 @@
+
 plugins {
     `kotlin-dsl`
     `java-gradle-plugin`
@@ -9,8 +10,14 @@ repositories {
 }
 
 dependencies {
+    // Kotlin Gradle Plugin
     implementation(
         "org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.21"
+    )
+
+    // Ktlint Gradle Plugin
+    implementation(
+        "org.jlleitschuh.gradle.ktlint:org.jlleitschuh.gradle.ktlint.gradle.plugin:14.2.0"
     )
 }
 
@@ -18,26 +25,22 @@ gradlePlugin {
     plugins {
         register("mrisKotlinLibrary") {
             id = "com.mris.kotlin-library"
-            implementationClass =
-                "MrisKotlinLibraryPlugin"
+            implementationClass = "MrisKotlinLibraryPlugin"
         }
 
         register("mrisKotlinTest") {
             id = "com.mris.kotlin-test"
-            implementationClass =
-                "MrisKotlinTestPlugin"
+            implementationClass = "MrisKotlinTestPlugin"
         }
 
         register("mrisEngineModule") {
             id = "com.mris.engine-module"
-            implementationClass =
-                "MrisEngineModulePlugin"
+            implementationClass = "MrisEngineModulePlugin"
         }
 
         register("mrisPublishing") {
             id = "com.mris.publishing"
-            implementationClass =
-                "MrisPublishingPlugin"
+            implementationClass = "MrisPublishingPlugin"
         }
     }
 }
