@@ -1,3 +1,4 @@
+
 name: Generate Gradle Wrapper & Validate Engine
 
 on:
@@ -105,7 +106,7 @@ jobs:
       # ----------------------------------------
       # 07. Validate Root Build
       # ----------------------------------------
-            - name: Validate root build
+      - name: Validate root build
         run: |
           ./gradlew help --configuration-cache --stacktrace
 
@@ -146,6 +147,8 @@ jobs:
       # ----------------------------------------
       - name: Final Build Verification
         run: |
+          set -euo pipefail
+
           ./gradlew help --configuration-cache
 
           echo "=================================="
@@ -157,3 +160,4 @@ jobs:
           echo "Foundation Registration: VERIFIED"
           echo "Foundation Modules: VERIFIED"
           echo "=================================="
+          
